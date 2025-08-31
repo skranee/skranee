@@ -48,8 +48,13 @@ jobs:
             let additions = 0;
             let deletions = 0;
             for (const pr of mergedPRs) {
-              additions += pr.additions;
-              deletions += pr.deletions;
+              const prDetails = await github.request('GET /repos/{owner}/{repo}/pulls/{pull_number}', {
+                owner,
+                repo,
+                pull_number: pr.number
+              });
+              additions += prDetails.data.additions;
+              deletions += prDetails.data.deletions;
             }
 
             // --- 2. Commits ---
