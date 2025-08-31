@@ -10,10 +10,9 @@ I build practical, user-focused web applications with a preference for TypeScrip
 Developing and evolving a secure, censorship-resistant messenger powered by its own blockchain.  
 🛠 Working on core features • 💬 chat & connectivity • 🎨 new UI flows • ⚡ improving user experience  
 **Tech:** Vue, TypeScript, Electron, Capacitor
-🔗 [Adamant Repo](https://github.com/Adamant-im/adamant-im)
 
 <!-- ADAMANT-STATS:START -->
-**Last 6 months in [Adamant-im/adamant-im](https://github.com/Adamant-im/adamant-im):**
+**Last 6 months in [Adamant](https://github.com/Adamant-im/adamant-im):**
 - 🧩 [Commits](https://github.com/Adamant-im/adamant-im/commits?author=skranee): **203**
 - 🔀 [PRs opened](https://github.com/Adamant-im/adamant-im/pulls?q=is%3Apr+author%3Askranee+created%3A%3E%3D2025-03-01): **25** (merged: **22**)
 - 📈 Lines added: **5,566**
