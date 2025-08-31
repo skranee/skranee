@@ -31,7 +31,28 @@ jobs:
             const sinceISO = new Date(now - 183*24*60*60*1000).toISOString();
             const sinceDate = sinceISO.slice(0,10);
 
-            // --- 1. Commits + lines ---
+            // --- 1. PRs merged ---
+            const mergedPRs = await github.paginate("GET /repos/{owner}/{repo}/pulls", {
+              owner,
+              repo,
+              state: "closed",
+              per_page: 100,
+            }, (response) =>
+              response.data.filter(pr =>
+                pr.merged_at &&
+                pr.user.login === username &&
+                new Date(pr.merged_at) >= new Date(sinceISO)
+              )
+            );
+
+            let additions = 0;
+            let deletions = 0;
+            for (const pr of mergedPRs) {
+              additions += pr.additions;
+              deletions += pr.deletions;
+            }
+
+            // --- 2. Commits ---
             let page = 1;
             let allCommits = [];
             while (true) {
@@ -42,29 +63,16 @@ jobs:
               allCommits = allCommits.concat(commits.data);
               page++;
             }
-
-            let additions = 0;
-            let deletions = 0;
-            for (const c of allCommits) {
-              const sha = c.sha;
-              const details = await github.request('GET /repos/{owner}/{repo}/commits/{sha}', {
-                owner, repo, sha
-              });
-              additions += details.data.stats.additions;
-              deletions += details.data.stats.deletions;
-            }
             const commitCount = allCommits.length;
 
-            // --- 2. PRs ---
+            // --- 3. PRs ---
             const prsOpened = (await github.request('GET /search/issues', {
               q: `repo:${owner}/${repo} type:pr author:${username} created:>=${sinceDate}`
             })).data.total_count;
 
-            const prsMerged = (await github.request('GET /search/issues', {
-              q: `repo:${owner}/${repo} type:pr author:${username} is:merged merged:>=${sinceDate}`
-            })).data.total_count;
+            const prsMerged = mergedPRs.length;
 
-            // --- 3. Issues ---
+            // --- 4. Issues ---
             const issuesOpened = (await github.request('GET /search/issues', {
               q: `repo:${owner}/${repo} type:issue author:${username} created:>=${sinceDate}`
             })).data.total_count;
@@ -72,8 +80,8 @@ jobs:
             const lines = [
               `**Last 6 months in [${owner}/${repo}](https://github.com/${owner}/${repo}):**`,
               `- 🧩 [Commits](https://github.com/${owner}/${repo}/commits?author=${username}): **${commitCount}**`,
-              `- 📈 Lines added: **${additions.toLocaleString()}**`,
-              `- 📉 Lines removed: **${deletions.toLocaleString()}**`,
+              `- 📈 Lines added (merged PRs): **${additions.toLocaleString()}**`,
+              `- 📉 Lines removed (merged PRs): **${deletions.toLocaleString()}**`,
               `- 🔀 [PRs opened](https://github.com/${owner}/${repo}/pulls?q=is%3Apr+author%3A${username}+created%3A%3E%3D${sinceDate}): **${prsOpened}** (merged: **${prsMerged}**)`,
               `- ❗ [Issues opened](https://github.com/${owner}/${repo}/issues?q=is%3Aissue+author%3A${username}+created%3A%3E%3D${sinceDate}): **${issuesOpened}**`
             ].join('\n');
