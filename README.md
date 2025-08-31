@@ -12,6 +12,9 @@ Developing and evolving a secure, censorship-resistant messenger powered by its 
 **Tech:** Vue, TypeScript, Electron, Capacitor
 🔗 [Adamant Repo](https://github.com/Adamant-im/adamant-im)
 
+<!-- ADAMANT-STATS:START -->
+<!-- ADAMANT-STATS:END -->
+
 ---
 
 ## 🕰️ Previous Projects
