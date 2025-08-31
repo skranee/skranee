@@ -1,0 +1,78 @@
+name: Update ADAMANT contribution stats
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+  push:
+    paths:
+      - "README.md"
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update stats in README
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+
+            const owner = 'Adamant-im';
+            const repo = 'adamant-im';
+            const username = 'skranee';
+
+            const now = Date.now();
+            const sinceISO = new Date(now - 365*24*60*60*1000).toISOString();
+            const sinceDate = sinceISO.slice(0,10); // YYYY-MM-DD
+
+            // Коммиты за 12 месяцев
+            const commits = await github.paginate('GET /repos/{owner}/{repo}/commits', {
+              owner, repo, author: username, since: sinceISO, per_page: 100
+            });
+            const commitCount = commits.length;
+
+            // PR: открытые и смерженные за 12 месяцев
+            const prsOpened = (await github.request('GET /search/issues', {
+              q: `repo:${owner}/${repo} type:pr author:${username} created:>=${sinceDate}`
+            })).data.total_count;
+
+            const prsMerged = (await github.request('GET /search/issues', {
+              q: `repo:${owner}/${repo} type:pr author:${username} is:merged merged:>=${sinceDate}`
+            })).data.total_count;
+
+            // Issues: созданные за 12 месяцев
+            const issuesOpened = (await github.request('GET /search/issues', {
+              q: `repo:${owner}/${repo} type:issue author:${username} created:>=${sinceDate}`
+            })).data.total_count;
+
+            const lines = [
+              `**Last 12 months in [${owner}/${repo}](https://github.com/${owner}/${repo}):**`,
+              `- 🧩 [Commits](https://github.com/${owner}/${repo}/commits?author=${username}): **${commitCount}**`,
+              `- 🔀 [PRs opened](https://github.com/${owner}/${repo}/pulls?q=is%3Apr+author%3A${username}+created%3A%3E%3D${sinceDate}): **${prsOpened}** (merged: **${prsMerged}**)`,
+              `- ❗ [Issues opened](https://github.com/${owner}/${repo}/issues?q=is%3Aissue+author%3A${username}+created%3A%3E%3D${sinceDate}): **${issuesOpened}**`
+            ].join('\n');
+
+            const start = '<!-- ADAMANT-STATS:START -->';
+            const end = '<!-- ADAMANT-STATS:END -->';
+
+            const path = 'README.md';
+            let readme = fs.readFileSync(path, 'utf8');
+
+            if (!readme.includes(start) || !readme.includes(end)) {
+              throw new Error(`Markers not found. Add these lines:\n${start}\n${end}`);
+            }
+
+            const newBlock = `${start}\n${lines}\n${end}`;
+            readme = readme.replace(new RegExp(`${start}[\\s\\S]*?${end}`), newBlock);
+            fs.writeFileSync(path, readme);
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update ADAMANT repo contribution stats"
