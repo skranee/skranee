@@ -15,8 +15,8 @@ Developing and evolving a secure, censorship-resistant messenger powered by its 
 **Last 6 months in [Adamant](https://github.com/Adamant-im/adamant-im):**
 - 🧩 [Commits](https://github.com/Adamant-im/adamant-im/commits?author=skranee): **203**
 - 🔀 [PRs opened](https://github.com/Adamant-im/adamant-im/pulls?q=is%3Apr+author%3Askranee+created%3A%3E%3D2025-03-01): **25** (merged: **22**)
-- 📈 Lines added: **5,566**
-- 📉 Lines removed: **3,420**
+- 📈 Additions: **5,566**
+- 📉 Deletions: **3,420**
 <!-- ADAMANT-STATS:END -->
 
 ---
