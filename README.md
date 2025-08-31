@@ -13,6 +13,10 @@ Developing and evolving a secure, censorship-resistant messenger powered by its 
 🔗 [Adamant Repo](https://github.com/Adamant-im/adamant-im)
 
 <!-- ADAMANT-STATS:START -->
+**Last 12 months in [Adamant-im/adamant-im](https://github.com/Adamant-im/adamant-im):**
+- 🧩 [Commits](https://github.com/Adamant-im/adamant-im/commits?author=skranee): **211**
+- 🔀 [PRs opened](https://github.com/Adamant-im/adamant-im/pulls?q=is%3Apr+author%3Askranee+created%3A%3E%3D2024-08-31): **26** (merged: **23**)
+- ❗ [Issues opened](https://github.com/Adamant-im/adamant-im/issues?q=is%3Aissue+author%3Askranee+created%3A%3E%3D2024-08-31): **0**
 <!-- ADAMANT-STATS:END -->
 
 ---
