@@ -1,6 +1,6 @@
 ## 🌎 Skranee
 
-I build practical, user-focused web applications with a preference for TypeScript-first workflows and clean, maintainable UI. ✨
+I build practical, user-focused web applications with a preference for TypeScript-first workflows and clean, maintainable UI.
 
 ---
 
