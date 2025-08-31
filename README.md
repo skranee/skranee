@@ -1,16 +1,35 @@
-## Hi there 👋
+## 🌎 Skranee
 
-<!--
-**skranee/skranee** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+I build practical, user-focused web applications with a preference for TypeScript-first workflows and clean, maintainable UI. ✨
 
-Here are some ideas to get you started:
+---
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## 🚀 Current Project
+
+### ⛓️ ADAMANT — Blockchain Messenger
+Developing and evolving a secure, censorship-resistant messenger powered by its own blockchain.  
+🛠 Working on core features • 💬 chat & connectivity • 🎨 new UI flows • ⚡ improving user experience  
+**Tech:** Vue, TypeScript, Electron, Capacitor
+🔗 [Adamant Repo](https://github.com/Adamant-im/adamant-im)
+
+---
+
+## 🕰️ Previous Projects
+
+### 🎭 Saint Diamond Entertainment — Communication App
+Built matchmaking and messaging flows, redesigned key interfaces, and integrated backend services.  
+**Tech:** Nuxt, Node.js, MySQL, Docker
+
+### 🌐 Freelance / Side Projects
+Full-stack projects: authentication, websocket chat, admin panels, crypto deposit/withdraw flows.  
+**Tech:** React, Node.js, MongoDB, TypeScript
+
+---
+
+## 🧰 Tech stack
+`TypeScript` • `Vue` • `React` • `Node.js` • `Electron` • `Docker` • `SQL` • `MongoDB` • `Prisma`
+
+---
+
+## 📬 Contact
+- 📧 Email: skranee999@gmail.com
