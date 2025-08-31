@@ -82,7 +82,7 @@ jobs:
               `- 🧩 [Commits](https://github.com/${owner}/${repo}/commits?author=${username}): **${commitCount}**`,
               `- 🔀 [PRs opened](https://github.com/${owner}/${repo}/pulls?q=is%3Apr+author%3A${username}+created%3A%3E%3D${sinceDate}): **${prsOpened}** (merged: **${prsMerged}**)`,
               `- 📈 Lines added: **${additions.toLocaleString()}**`,
-              `- 📉 Lines removed: **${deletions.toLocaleString()}**`;
+              `- 📉 Lines removed: **${deletions.toLocaleString()}**`];
 
             const start = '<!-- ADAMANT-STATS:START -->';
             const end = '<!-- ADAMANT-STATS:END -->';
