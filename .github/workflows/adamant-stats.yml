@@ -77,19 +77,12 @@ jobs:
 
             const prsMerged = mergedPRs.length;
 
-            // --- 4. Issues ---
-            const issuesOpened = (await github.request('GET /search/issues', {
-              q: `repo:${owner}/${repo} type:issue author:${username} created:>=${sinceDate}`
-            })).data.total_count;
-
             const lines = [
               `**Last 6 months in [${owner}/${repo}](https://github.com/${owner}/${repo}):**`,
               `- 🧩 [Commits](https://github.com/${owner}/${repo}/commits?author=${username}): **${commitCount}**`,
-              `- 📈 Lines added (merged PRs): **${additions.toLocaleString()}**`,
-              `- 📉 Lines removed (merged PRs): **${deletions.toLocaleString()}**`,
               `- 🔀 [PRs opened](https://github.com/${owner}/${repo}/pulls?q=is%3Apr+author%3A${username}+created%3A%3E%3D${sinceDate}): **${prsOpened}** (merged: **${prsMerged}**)`,
-              `- ❗ [Issues opened](https://github.com/${owner}/${repo}/issues?q=is%3Aissue+author%3A${username}+created%3A%3E%3D${sinceDate}): **${issuesOpened}**`
-            ].join('\n');
+              `- 📈 Lines added: **${additions.toLocaleString()}**`,
+              `- 📉 Lines removed: **${deletions.toLocaleString()}**`;
 
             const start = '<!-- ADAMANT-STATS:START -->';
             const end = '<!-- ADAMANT-STATS:END -->';
